@@ -12,17 +12,20 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="resources/scripts/flat-ui.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-    <script type="text/javascript" src="resources/js/bootstrap-datetimepicker.min.js"></script>
+
     <script src="https://unpkg.com/popper.js@1.14.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 
 
-    <script src="resources/js/application.js"></script>
+    <script type="text/javascript" src="resources/js/application.js"></script>
 
-    <link rel="stylesheet" href="resources/css/bootstrap-datetimepicker.min.css" />
+
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="resources/css/flat-ui.css" rel="stylesheet">
 
 
+    <script src="https://cdn.jsdelivr.net/npm/zebra_pin@2.0.0/dist/zebra_pin.min.js"></script>
+    <script src="resources/Zebra_Datepicker-master/dist/zebra_datepicker.min.js"></script>
+    <script src="resources/Zebra_Datepicker-master/examples/examples.js"></script>
 
 
     <link rel="stylesheet" href="resources/Zebra_Datepicker-master/dist/css/default/zebra_datepicker.min.css" type="text/css">
@@ -65,9 +68,9 @@
                 '    </div>'
 
 
-            document.body.appendChild(element);
+            document.getElementById("userJSP").appendChild(element);
             $('.form-control.date-picker').Zebra_DatePicker();
-			$('[data-toggle="select"]').select2();
+            $('[data-toggle="select"]').select2();
         }
 
     </script>
@@ -126,10 +129,7 @@
 </script>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/zebra_pin@2.0.0/dist/zebra_pin.min.js"></script>
-<script src="resources/Zebra_Datepicker-master/dist/zebra_datepicker.min.js"></script>
-<script src="resources/Zebra_Datepicker-master/examples/examples.js"></script>
+
 
 </body>
 
