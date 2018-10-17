@@ -42,17 +42,15 @@
         function add() {
 
             var element = document.createElement('div');
-            var select = document.getElementById('type');
-
             element.class = 'well';
             element.innerHTML = '<div class="row">\n' +
                 '        <div class="col-sm-2">\n' +
                 '            <input  id="datepicker" type="text" class="form-control date-picker" data-zdp_readonly_element="false"/>\n' +
-                '        </div>\n'
-            element.appendChild(select);
-
-                element.innerHTML = element.innerHTML +
-            '        <div class="col-sm-2">\n' +
+                '        </div>\n'+
+				' <select class="form-control select select-primary mbl" id="type" data-toggle="select" path="type">\n' +
+            '                <option value="1">1<option> \n' +
+                '<option value="2">2<option> \n' +
+            '        </select>\n'+            '        <div class="col-sm-2">\n' +
                 '            <div class="input-group">\n' +
                 '                <input type="text" placeholder="..." class="form-control"/>\n' +
                 '                <span class="input-group-text">руб</span>\n' +
@@ -69,7 +67,7 @@
 
             document.body.appendChild(element);
             $('.form-control.date-picker').Zebra_DatePicker();
-
+			$('[data-toggle="select"]').select2();
         }
 
     </script>
