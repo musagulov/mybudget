@@ -44,31 +44,13 @@
 
         function add() {
 
-            var element = document.createElement('div');
-            element.class = 'well';
-            element.innerHTML = '<div class="row">\n' +
-                '        <div class="col-sm-2">\n' +
-                '            <input  id="datepicker" type="text" class="form-control date-picker" data-zdp_readonly_element="false"/>\n' +
-                '        </div>\n'+
-				' <select class="form-control select select-primary mbl" id="type" data-toggle="select" path="type">\n' +
-            '                <option value="1">1<option> \n' +
-                '<option value="2">2<option> \n' +
-            '        </select>\n'+            '        <div class="col-sm-2">\n' +
-                '            <div class="input-group">\n' +
-                '                <input type="text" placeholder="..." class="form-control"/>\n' +
-                '                <span class="input-group-text">руб</span>\n' +
-                '            </div>\n' +
-                '        </div>\n' +
-                '        <div class="col-sm-4">\n' +
-                '            <input type="text" class="form-control" placeholder="Comment please" />\n' +
-                '        </div>\n' +
-                '        <div class="col-sm-1">\n' +
-                '            <button type="button" class="btn btn-info" onclick = "add()" >Add</button>\n' +
-                '        </div>\n' +
-                '    </div>'
-
-
-            document.getElementById("userJSP").appendChild(element);
+            var $well = $('#wellTemplate').clone(true);
+            $well[0].removeAttribute('style');
+            var newId = 'well' + Date.now();
+            $well[0].id=newId;
+            $well.appendTo("#formUserJSP");
+            $('#'+newId+' > div > select')[0].setAttribute('data-toggle','select');
+            $('#'+newId+' > div > div > input')[0].setAttribute('class','form-control date-picker');
             $('.form-control.date-picker').Zebra_DatePicker();
             $('[data-toggle="select"]').select2();
         }
@@ -85,17 +67,17 @@
     </div><!-- /.navbar-collapse -->
 </nav><!-- /navbar -->
 
-<spring:form method="post" enctype="application/x-www-form-urlencoded" acceptCharset="UTF-8" modelAttribute="userJSP" action="check-user">
+<spring:form method="post" enctype="application/x-www-form-urlencoded" acceptCharset="UTF-8" modelAttribute="userJSP" action="check-user" id ="formUserJSP" >
 
     <button type = "Submit" class="btn btn-info">Submit</button>
-<div class="well">
+<div class="well" style = "display: none " id = "wellTemplate">
 
     <div class="row">
         <div class="col-sm-2">
-            <spring:input path="date" type="text" class="form-control date-picker" data-zdp_readonly_element="false"/>
+            <spring:input path="date" type="text" data-zdp_readonly_element="false"/>
         </div>
 
-        <spring:select class="form-control select select-primary mbl" id="type" data-toggle="select" path="type">
+        <spring:select class="form-control select select-primary mbl" path="type">
             <c:forEach var="type" items = "${types}">
                 <spring:option value="${type}">${type}</spring:option>
             </c:forEach>
@@ -123,10 +105,18 @@
 
 </spring:form>
 
-
-<script  type="text/javascript">
+<script type = "text/javascript">
+    var $well = $('#wellTemplate').clone(true);
+    $well[0].removeAttribute('style');
+    $well[0].id='well3';
+    $well.appendTo("#formUserJSP");
+    $('#well3 > div > select')[0].setAttribute('data-toggle','select');
+    $('#well3 > div > div > input')[0].setAttribute('class','form-control date-picker');
     $('.form-control.date-picker').Zebra_DatePicker();
+    $('[data-toggle="select"]').select2();
+
 </script>
+
 
 
 
