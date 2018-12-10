@@ -1,6 +1,6 @@
 <!-- обратите внимание на spring тэги -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 
@@ -48,7 +48,28 @@
             $well[0].removeAttribute('style');
             var newId = 'well' + Date.now();
             $well[0].id=newId;
-            $well.appendTo("#formUserJSP");
+
+            var inputDateName = $well[0].children[0].children[0].children[0].name;
+            inputDateName = 'transactions['+inputDateName + '].date';
+            $well[0].children[0].children[0].children[0].name = inputDateName;
+            $('#wellTemplate > div > div:nth-child(1) > input[type="text"]')[0].name = 1 + Number($('#wellTemplate > div > div:nth-child(1) > input[type="text"]')[0].name);
+
+            var inputTypeName =  $well[0].children[0].children[1].name;
+            inputTypeName = 'transactions['+ inputTypeName + '].type';
+            $well[0].children[0].children[1].name = inputTypeName;
+            $('#wellTemplate > div > select')[0].name = 1+ Number($('#wellTemplate > div > select')[0].name);
+
+            var inputAmountName = $well[0].children[0].children[2].children[0].children[0].name;
+            inputAmountName = 'transactions['+ inputAmountName + '].amount';
+            $well[0].children[0].children[2].children[0].children[0].name = inputAmountName;
+            $('#wellTemplate > div > div:nth-child(3) > div > input')[0].name = 1+ Number($('#wellTemplate > div > div:nth-child(3) > div > input')[0].name);
+
+            var inputCommentName = $well[0].children[0].children[3].children[0].name;
+            inputCommentName = 'transactions['+ inputCommentName + '].comment';
+            $well[0].children[0].children[3].children[0].name = inputCommentName;
+            $('#wellTemplate > div > div.col-sm-4 > input')[0].name = 1+ Number($('#wellTemplate > div > div.col-sm-4 > input')[0].name);
+
+            $well.appendTo("#formAddTran");
             $('#'+newId+' > div > select')[0].setAttribute('data-toggle','select');
             $('#'+newId+' > div > div > input')[0].setAttribute('class','form-control date-picker');
             $('.form-control.date-picker').Zebra_DatePicker();
@@ -67,33 +88,35 @@
     </div><!-- /.navbar-collapse -->
 </nav><!-- /navbar -->
 
-<spring:form method="post" enctype="application/x-www-form-urlencoded" acceptCharset="UTF-8" modelAttribute="userJSP" action="check-user" id ="formUserJSP" >
+<form:form method="post" enctype="application/x-www-form-urlencoded" acceptCharset="UTF-8" modelAttribute="trich" action="check-user" id ="formAddTran" >
 
     <button type = "Submit" class="btn btn-info">Submit</button>
-<div class="well" style = "display: none " id = "wellTemplate">
+    <c:forEach items="${trich.transactions}" var="tran" varStatus="status">
+
+    <div class="well" style = "display: none " id = "wellTemplate">
 
     <div class="row">
         <div class="col-sm-2">
-            <spring:input path="date" type="text" data-zdp_readonly_element="false"/>
+            <input name="${status.index}" type="text" data-zdp_readonly_element="false"/>
         </div>
 
-        <spring:select class="form-control select select-primary mbl" path="type">
+        <select class="form-control select select-primary mbl" name="${status.index}">
             <c:forEach var="type" items = "${types}">
-                <spring:option value="${type}">${type}</spring:option>
+                <option value="${type}">${type}</option>
             </c:forEach>
 
-        </spring:select>
+        </select>
 
         <div class="col-sm-2">
             <div class="input-group">
 
-                <spring:input path="amount" type="text" placeholder="..." class="form-control"/>
+                <input name="${status.index}" type="text" placeholder="..." class="form-control"/>
                 <span class="input-group-text">руб</span>
             </div>
 
         </div>
         <div class="col-sm-4">
-            <spring:input type="text" class="form-control" placeholder="Comment please" path="comment"/>
+            <input type="text" class="form-control" placeholder="Comment please" name="${status.index}"/>
         </div>
         <div class="col-sm-1">
             <button type="button" class="btn btn-info" onclick = "add()" >Add</button>
@@ -102,18 +125,12 @@
     </div>
 
 </div>
+    </c:forEach>
 
-</spring:form>
+</form:form>
 
 <script type = "text/javascript">
-    var $well = $('#wellTemplate').clone(true);
-    $well[0].removeAttribute('style');
-    $well[0].id='well3';
-    $well.appendTo("#formUserJSP");
-    $('#well3 > div > select')[0].setAttribute('data-toggle','select');
-    $('#well3 > div > div > input')[0].setAttribute('class','form-control date-picker');
-    $('.form-control.date-picker').Zebra_DatePicker();
-    $('[data-toggle="select"]').select2();
+    add();
 
 </script>
 
