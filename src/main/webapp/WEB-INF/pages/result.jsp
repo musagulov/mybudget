@@ -9,20 +9,30 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 
 
-    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="resources/css/flat-ui.css" rel="stylesheet">
+
+
+
 
 
 </head>
 
 <body>
-<nav class="navbar navbar-default navbar-expand-lg" role="navigation">
+<nav class="navbar navbar-inverse navbar-embossed navbar-expand-lg" role="navigation">
+    <a class="navbar-brand" href="#" style=" color: #9B59B6; ">${balance} руб.</a>
     <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav mr-auto">
+            <li><a href="http://localhost:8081/CurrentResult">Show Transactions</a></li>
+            <li><a href="http://localhost:8081/addTransactions">Add Transactions</a></li>
+        </ul>
+
     </div><!-- /.navbar-collapse -->
-</nav><!-- /navbar -->
+</nav>
 
 <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
@@ -66,6 +76,12 @@
         } );
     } );
 
+    $(document).ready(function(){
+    $("#example_paginate")[0].className = "pagination";
+
+    $("#example_paginate")[0].style.textAlign="right";
+    $("#example_paginate")[0].style.display="block";
+    });
 </script>
 <a href="http://localhost:8080/123"    >poka</a>
 </body>

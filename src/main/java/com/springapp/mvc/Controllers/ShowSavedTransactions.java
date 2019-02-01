@@ -1,7 +1,9 @@
 package com.springapp.mvc.Controllers;
 
+import com.springapp.mvc.DAO.BalanceDAO;
 import com.springapp.mvc.DAO.TransactionDAO;
 import com.springapp.mvc.DAO.TransactionTypeDAO;
+import com.springapp.mvc.model.CurrentBalance;
 import com.springapp.mvc.model.Transaction;
 import com.springapp.mvc.model.TransactionRich;
 import com.springapp.mvc.model.User;
@@ -25,11 +27,15 @@ public class ShowSavedTransactions {
 
         TransactionRich savedTransactions = new TransactionRich();
         TransactionDAO tranDao = new TransactionDAO();
-        savedTransactions.setTransactions(tranDao.selectTransactions(20));
+        savedTransactions.setTransactions(tranDao.selectTransactions(50));
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("result");
         modelAndView.addObject("savedTransactions", savedTransactions);
+        BalanceDAO balanceDAO = new BalanceDAO();
+
+
+        modelAndView.addObject("balance", balanceDAO.getCurrentBalance().getAmount());
         return modelAndView;
     }
 }

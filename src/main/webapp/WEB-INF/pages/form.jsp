@@ -73,6 +73,7 @@
             $('#'+newId+' > div > select')[0].setAttribute('data-toggle','select');
             $('#'+newId+' > div > div > input')[0].setAttribute('class','form-control date-picker');
             $('.form-control.date-picker').Zebra_DatePicker();
+            $('.form-control.date-picker').last().data('Zebra_DatePicker').set_date(new Date());
             $('[data-toggle="select"]').select2();
         }
 
@@ -81,12 +82,14 @@
 
 </head>
 
-
-
-<nav class="navbar navbar-default navbar-expand-lg" role="navigation">
+<nav class="navbar navbar-inverse navbar-embossed navbar-expand-lg" role="navigation">
     <div class="collapse navbar-collapse" id="navbar-collapse-01">
+        <ul class="nav navbar-nav mr-auto">
+            <li><a href="http://localhost:8081/CurrentResult">Show Transactions</a></li>
+            <li><a href="http://localhost:8081/addTransactions">Add Transactions</a></li>
+        </ul>
     </div><!-- /.navbar-collapse -->
-</nav><!-- /navbar -->
+</nav>
 
 <form:form method="post" enctype="application/x-www-form-urlencoded" acceptCharset="UTF-8" modelAttribute="trich" action="check-user" id ="formAddTran" >
 

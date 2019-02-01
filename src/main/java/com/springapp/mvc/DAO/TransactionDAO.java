@@ -4,6 +4,7 @@ import com.springapp.mvc.model.Transaction;
 
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class TransactionDAO {
     
@@ -15,13 +16,15 @@ public class TransactionDAO {
 
     public void insertTran(Transaction tran)
     {
-        String query = "Insert into [Transaction] (Amount,TranDate,Id,month,comment,TypeId)";
+        Date currentDatetime = new Date();
+        String query = "Insert into [Transaction] (Amount,TranDate,Id,month,comment, CreateDate, TypeId)";
         query = query + " Select ";
         query = query + tran.getAmount();
         query = query + ",'" + tran.getDate() + "'";
         query = query + ",'" + UUID.randomUUID() + "'";
         query = query + ",'" + tran.getDate() + "'";
         query = query + ",'" + tran.getComment() +  "'";
+        query = query + ",'" + new Timestamp(currentDatetime.getTime()) +  "'";
         query = query + ", t.Id from type as t where t.name = '" + tran.getType() + "'";
         System.out.print(query);
 
@@ -53,7 +56,7 @@ public class TransactionDAO {
     }
 
     public List<Transaction> selectTransactions(int count){
-        String query = "Select t.name, tr.* from [Transaction] as tr join [Type] as t on t.id= tr.typeId order by tr.TranDate LIMIT " + count;
+        String query = "Select t.name, tr.* from [Transaction] as tr join [Type] as t on t.id= tr.typeId order by tr.TranDate desc LIMIT " + count;
         System.out.print(query);
         List<Transaction> tranList = new ArrayList<Transaction>();
         try {
