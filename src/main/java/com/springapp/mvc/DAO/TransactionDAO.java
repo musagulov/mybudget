@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class TransactionDAO {
     
-    private static final String url = "jdbc:sqlite:D:/BD/MyBudget";
+    private static final String url = "jdbc:sqlite:D:\\BD\\MyBudget.db";
 
     private static Connection con;
     private static Statement stmt;

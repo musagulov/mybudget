@@ -1,6 +1,8 @@
 package com.springapp.mvc.Controllers;
 
+import com.springapp.mvc.DAO.BalanceDAO;
 import com.springapp.mvc.DAO.TransactionDAO;
+import com.springapp.mvc.model.CurrentBalance;
 import com.springapp.mvc.model.Transaction;
 import com.springapp.mvc.model.TransactionRich;
 import com.springapp.mvc.model.User;
@@ -29,12 +31,18 @@ public class CreateTransaction {
         //имя представления, куда нужно будет перейти
         modelAndView.setViewName("result");
 
+        BalanceDAO balanceDAO = new BalanceDAO();
+        CurrentBalance currentBalance = balanceDAO.getCurrentBalance();
+
         TransactionDAO tranDAO = new TransactionDAO();
+
 
         for ( Transaction tr : tran.transactions)
         {
             tranDAO.insertTran(tr);
+            currentBalance.setAmount(currentBalance.getAmount() - tr.getAmount());
         }
+        balanceDAO.insertNewBalance(currentBalance.getAmount());
 
         //записываем в атрибут userJSP (используется на странице *.jsp объект user
         modelAndView.addObject("savedTransactions", tran);

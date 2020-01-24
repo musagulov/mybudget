@@ -8,7 +8,7 @@ import java.util.*;
 
 public class TransactionTypeDAO {
 
-    private static final String url = "jdbc:sqlite:D:/BD/MyBudget";
+    private static final String url = "jdbc:sqlite:D:\\BD\\MyBudget.db";
 
     private static Connection con;
     private static Statement stmt;
@@ -36,6 +36,7 @@ public class TransactionTypeDAO {
             {
                 res.add(result.getString(1));
             }
+            System.out.print("succes result");
         }
         catch (SQLException sqlEx) {
             System.out.print(query)        ;
